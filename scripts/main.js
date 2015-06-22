@@ -5,6 +5,7 @@ Backbone.$ = require('jquery');
 var HomePageComponent = require('./components/HomePageComponent');
 var AlbumViewComponent = require('./components/AlbumViewComponent');
 var AlbumListComponent = require('./components/AlbumListComponent');
+var ZoomInComponent = require('./components/AlbumListComponent');
 
 var ImageCollection = require('./collections/ImageCollection');
 
@@ -14,7 +15,8 @@ var App = Backbone.Router.extend({
     routes: {
         '': 'home',
         "home": "home",
-        "album/:number":"album"
+        "album/:number":"album",
+        "zoom/:id": "zoom"
     },
     home: function() {
         React.render(
@@ -26,9 +28,17 @@ var App = Backbone.Router.extend({
     },
     album: function(number) {
     	React.render(
-        <AlbumViewComponent />,
+        <AlbumViewComponent myRouter={myRouter} number={number}/>,
         document.querySelector('#container'));
-    }
+    },
+    zoom: function(id) {
+        React.render(
+        <div>   
+            <h1>Helloooooo</h1>
+            <ZoomInComponent myRouter={myRouter} id={id} />
+        </div>,
+        document.querySelector('#container'));
+    }    
 });
 
 var myRouter = new App();

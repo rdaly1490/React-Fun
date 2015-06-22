@@ -6,7 +6,8 @@ module.exports = Backbone.Model.extend({
 		title: '',
 		url: '',
 		albumNumber: null,
-		createAt: null
+		createdAt: null,
+		id: null
 	},
 	urlRoot:"http://tiny-pizza-server.herokuapp.com/collections/robalbum",
 	idAttribute: "_id"

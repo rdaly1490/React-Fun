@@ -32678,6 +32678,7 @@ module.exports = React.createClass({
 
 var React = require('react');
 var Backbone = require('backbone');
+var $ = require('jquery');
 Backbone.$ = require('jquery');
 var ImageModel = require('../models/ImageModel');
 
@@ -32686,26 +32687,68 @@ var AlbumListComponent = require('./AlbumListComponent');
 module.exports = React.createClass({
     displayName: 'exports',
 
+    getInitialState: function getInitialState() {
+        return {
+            AlbumArray: []
+        };
+    },
+    componentWillMount: function componentWillMount() {
+        $.get('http://tiny-pizza-server.herokuapp.com/collections/robalbum', (function (imgList) {
+            if (this.isMounted()) {
+                this.setState({
+                    AlbumArray: imgList
+                });
+            }
+        }).bind(this));
+    },
     render: function render() {
+        var currentAlbum = this.props.number;
+
+        var albumContents = this.state.AlbumArray.map(function (testModel) {
+
+            if (testModel.albumNumber === currentAlbum) {
+                // console.log(testModel._id);
+
+                return React.createElement(
+                    'div',
+                    { className: 'inside-album', key: testModel._id },
+                    React.createElement(
+                        'h5',
+                        null,
+                        testModel.title
+                    ),
+                    React.createElement('img', { 'data-id': testModel._id, src: testModel.url })
+                );
+            }
+        });
         return React.createElement(
             'div',
             null,
             React.createElement(
-                'form',
-                { onSubmit: this.submitImg },
-                React.createElement('input', { type: 'text', ref: 'title', placeholder: 'Title goes here' }),
-                React.createElement('br', null),
-                React.createElement('input', { type: 'text', ref: 'url', placeholder: 'URL goes here' }),
-                React.createElement('br', null),
-                React.createElement('input', { type: 'text', ref: 'albumNumber', placeholder: 'Album Number' }),
-                React.createElement('br', null),
-                React.createElement(
-                    'button',
-                    { type: 'submit' },
-                    'Post you blog'
-                )
+                'h1',
+                null,
+                'Album Page!'
+            ),
+            React.createElement(
+                'button',
+                { onClick: this.goBack },
+                'Go Back'
+            ),
+            React.createElement(
+                'div',
+                { onClick: this.zoomIn },
+                albumContents
             )
         );
+    },
+    goBack: function goBack(e) {
+        e.preventDefault();
+        this.props.myRouter.navigate('home', { trigger: true });
+    },
+    zoomIn: function zoomIn(e) {
+        e.preventDefault();
+        var imgID = $(e.target).attr('data-id');
+        this.props.myRouter.navigate('zoom/' + imgID, { trigger: true });
     }
 
 });
@@ -32767,6 +32810,7 @@ Backbone.$ = require('jquery');
 var HomePageComponent = require('./components/HomePageComponent');
 var AlbumViewComponent = require('./components/AlbumViewComponent');
 var AlbumListComponent = require('./components/AlbumListComponent');
+var ZoomInComponent = require('./components/AlbumListComponent');
 
 var ImageCollection = require('./collections/ImageCollection');
 
@@ -32776,7 +32820,8 @@ var App = Backbone.Router.extend({
     routes: {
         '': 'home',
         'home': 'home',
-        'album/:number': 'album'
+        'album/:number': 'album',
+        'zoom/:id': 'zoom'
     },
     home: function home() {
         React.render(React.createElement(
@@ -32787,7 +32832,19 @@ var App = Backbone.Router.extend({
         ), document.querySelector('#container'));
     },
     album: function album(number) {
-        React.render(React.createElement(AlbumViewComponent, null), document.querySelector('#container'));
+        React.render(React.createElement(AlbumViewComponent, { myRouter: myRouter, number: number }), document.querySelector('#container'));
+    },
+    zoom: function zoom(id) {
+        React.render(React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'h1',
+                null,
+                'Helloooooo'
+            ),
+            React.createElement(ZoomInComponent, { myRouter: myRouter, id: id })
+        ), document.querySelector('#container'));
     }
 });
 
@@ -32810,7 +32867,8 @@ module.exports = Backbone.Model.extend({
 		title: '',
 		url: '',
 		albumNumber: null,
-		createAt: null
+		createdAt: null,
+		id: null
 	},
 	urlRoot: 'http://tiny-pizza-server.herokuapp.com/collections/robalbum',
 	idAttribute: '_id'

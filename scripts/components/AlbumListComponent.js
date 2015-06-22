@@ -78,18 +78,18 @@ module.exports = React.createClass({
 
         return (
             <div>
-            <h3>Album 1</h3>
-            <img data-id={1} onClick={this.goToAlbum} src={one.url} />
-            <h3>Album 2</h3>
-            <img data-id={2} onClick={this.goToAlbum} src={two.url} />
-            <h3>Album 3</h3>
-            <img data-id={3} onClick={this.goToAlbum} src={three.url} />
-            <h3>Album 4</h3>
-            <img data-id={4} onClick={this.goToAlbum} src={four.url} />
-            <h3>Album 5</h3>
-            <img data-id={5} onClick={this.goToAlbum} src={five.url} />
-            <h3>Album 6</h3>
-            <img data-id={6} onClick={this.goToAlbum} src={six.url} />
+                <h3>Album 1</h3>
+                <img data-id={1} onClick={this.goToAlbum} src={one.url} />
+                <h3>Album 2</h3>
+                <img data-id={2} onClick={this.goToAlbum} src={two.url} />
+                <h3>Album 3</h3>
+                <img data-id={3} onClick={this.goToAlbum} src={three.url} />
+                <h3>Album 4</h3>
+                <img data-id={4} onClick={this.goToAlbum} src={four.url} />
+                <h3>Album 5</h3>
+                <img data-id={5} onClick={this.goToAlbum} src={five.url} />
+                <h3>Album 6</h3>
+                <img data-id={6} onClick={this.goToAlbum} src={six.url} />
             </div>        
         );
     },
