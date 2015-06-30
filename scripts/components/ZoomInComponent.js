@@ -8,8 +8,19 @@ var AlbumListComponent = require('./AlbumListComponent');
 
 module.exports = React.createClass({
     getInitialState: function() {
+        var that = this;
+        var post = new ImageModel({
+            _id: this.props.id 
+        });
+        post.fetch();
+        console.log(post);
+
+        post.on("change", function() {
+            that.forceUpdate();
+        });
         return {
-            ZoomArray: []
+            ZoomArray: [],
+            post: post
         }
     },
     componentWillMount: function() {
@@ -38,7 +49,7 @@ module.exports = React.createClass({
 
             return (
                     <div className="inside-album" key={zoomModel._id}>
-                        <h5>{zoomModel.title}</h5>
+                        <h5>Title: {zoomModel.title}</h5>
                         <img style={style} data-id={zoomModel._id} src={zoomModel.url} />
                     </div>
                 );
@@ -47,6 +58,7 @@ module.exports = React.createClass({
         });
         return (
             <div className="col-xs-8 zoom">
+                <h3> Click Image to Return to album!</h3>
                 <div onClick={this.zoomOut}>
                     {zoomedContents}
                 </div>
@@ -55,8 +67,9 @@ module.exports = React.createClass({
     },
     zoomOut: function(e) {
         e.preventDefault();
+        console.log(this.state.post.get("albumNumber"));
         console.log("works");
-        // this.props.myRouter.navigate("album/"+, {trigger: true});
+        this.props.myRouter.navigate("album/"+this.state.post.get("albumNumber"), {trigger: true});
     }
 
  });

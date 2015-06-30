@@ -44,7 +44,7 @@ module.exports = React.createClass({
             <div className="container-fluid">
                 <div className="col-xs-4 col-xs-offset-1">
                     <h1>Album Page!</h1>
-                    <button onClick={this.goBack}>Go Home</button>
+                    <button style={{color:"#ECE9E4"}} onClick={this.goBack}>Go Home</button>
                     <div onClick={this.zoomIn}>
                         {albumContents}
                     </div>

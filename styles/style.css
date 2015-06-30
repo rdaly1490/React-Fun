@@ -39,10 +39,22 @@ html {
 
 button {
 	border-radius: 5px;
+	background-color: #3d3A35;
+	border:none;
+	color:#ECE9E4;
+}
+
+input {
+	background-color: #3d3A35;
+}
+
+label {
+	margin-top: 10px;
 }
 
 form {
 	background-color: #A7384A;
+	color:#ECE9E4;
 }
 
 .main {

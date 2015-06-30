@@ -32742,7 +32742,7 @@ module.exports = React.createClass({
                 ),
                 React.createElement(
                     'button',
-                    { onClick: this.goBack },
+                    { style: { color: '#ECE9E4' }, onClick: this.goBack },
                     'Go Home'
                 ),
                 React.createElement(
@@ -32786,9 +32786,21 @@ module.exports = React.createClass({
             React.createElement(
                 'form',
                 { onSubmit: this.submitImg },
-                React.createElement('input', { type: 'text', ref: 'title', placeholder: 'Title goes here' }),
+                React.createElement(
+                    'label',
+                    null,
+                    'Title'
+                ),
                 React.createElement('br', null),
-                React.createElement('input', { type: 'text', ref: 'url', placeholder: 'URL goes here' }),
+                React.createElement('input', { type: 'text', ref: 'title' }),
+                React.createElement('br', null),
+                React.createElement(
+                    'label',
+                    null,
+                    'URL'
+                ),
+                React.createElement('br', null),
+                React.createElement('input', { type: 'text', ref: 'url' }),
                 React.createElement('br', null),
                 React.createElement(
                     'label',
@@ -32949,8 +32961,19 @@ module.exports = React.createClass({
     displayName: 'exports',
 
     getInitialState: function getInitialState() {
+        var that = this;
+        var post = new ImageModel({
+            _id: this.props.id
+        });
+        post.fetch();
+        console.log(post);
+
+        post.on('change', function () {
+            that.forceUpdate();
+        });
         return {
-            ZoomArray: []
+            ZoomArray: [],
+            post: post
         };
     },
     componentWillMount: function componentWillMount() {
@@ -32980,6 +33003,7 @@ module.exports = React.createClass({
                     React.createElement(
                         'h5',
                         null,
+                        'Title: ',
                         zoomModel.title
                     ),
                     React.createElement('img', { style: style, 'data-id': zoomModel._id, src: zoomModel.url })
@@ -32990,6 +33014,11 @@ module.exports = React.createClass({
             'div',
             { className: 'col-xs-8 zoom' },
             React.createElement(
+                'h3',
+                null,
+                ' Click Image to Return to album!'
+            ),
+            React.createElement(
                 'div',
                 { onClick: this.zoomOut },
                 zoomedContents
@@ -32998,8 +33027,9 @@ module.exports = React.createClass({
     },
     zoomOut: function zoomOut(e) {
         e.preventDefault();
+        console.log(this.state.post.get('albumNumber'));
         console.log('works');
-        // this.props.myRouter.navigate("album/"+, {trigger: true});
+        this.props.myRouter.navigate('album/' + this.state.post.get('albumNumber'), { trigger: true });
     }
 
 });
