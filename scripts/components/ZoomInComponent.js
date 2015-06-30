@@ -25,6 +25,10 @@ module.exports = React.createClass({
         );
     },
     render: function() {
+            var style = {
+                height:"500px",
+                width:"500px"
+            };
 
             var currentId = this.props.id;
 
@@ -35,18 +39,24 @@ module.exports = React.createClass({
             return (
                     <div className="inside-album" key={zoomModel._id}>
                         <h5>{zoomModel.title}</h5>
-                        <img data-id={zoomModel._id} src={zoomModel.url} />
+                        <img style={style} data-id={zoomModel._id} src={zoomModel.url} />
                     </div>
                 );
             }
             
         });
         return (
-            <div>
-                <h5>Zoom Page!</h5>
-                {zoomedContents}
+            <div className="col-xs-8 zoom">
+                <div onClick={this.zoomOut}>
+                    {zoomedContents}
+                </div>
             </div>        
         );
+    },
+    zoomOut: function(e) {
+        e.preventDefault();
+        console.log("works");
+        // this.props.myRouter.navigate("album/"+, {trigger: true});
     }
 
  });

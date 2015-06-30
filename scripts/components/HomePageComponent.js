@@ -8,11 +8,19 @@ var AlbumListComponent = require('./AlbumListComponent');
 module.exports = React.createClass({
     render: function() {
         return (
-            <div>
+            <div className="col-xs-3 submit-img">
                 <form onSubmit={this.submitImg}>
                 <input type='text' ref='title' placeholder='Title goes here' /><br/>
                     <input type='text' ref='url' placeholder='URL goes here' /><br/>
-                    <input type='text' ref='albumNumber' placeholder='Album Number' /><br/>
+                    <label>Select Album Number</label><br />
+                    <select ref="albumNumber">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select><br />
                     <button type='submit'>Post you blog</button>
                 </form>
             </div>        
@@ -27,6 +35,7 @@ module.exports = React.createClass({
         });
         console.log(newPic);
         newPic.save();
+        this.forceUpdate();
     }
 
  });

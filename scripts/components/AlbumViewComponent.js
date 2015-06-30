@@ -32,7 +32,7 @@ module.exports = React.createClass({
             if(testModel.albumNumber === currentAlbum) {
 
             return (
-                    <div className="inside-album" key={testModel._id}>
+                    <div className="col-xs-6 inside-album" key={testModel._id}>
                         <h5>{testModel.title}</h5>
                         <img data-id={testModel._id} src={testModel.url} />
                     </div>
@@ -41,11 +41,13 @@ module.exports = React.createClass({
             
         });
         return (
-            <div>
-                <h1>Album Page!</h1>
-                <button onClick={this.goBack}>Go Back</button>
-                <div onClick={this.zoomIn}>
-                    {albumContents}
+            <div className="container-fluid">
+                <div className="col-xs-4 col-xs-offset-1">
+                    <h1>Album Page!</h1>
+                    <button onClick={this.goBack}>Go Home</button>
+                    <div onClick={this.zoomIn}>
+                        {albumContents}
+                    </div>
                 </div>
             </div>        
         );

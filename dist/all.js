@@ -32521,7 +32521,7 @@ module.exports = Backbone.Collection.extend({
 	url: 'http://tiny-pizza-server.herokuapp.com/collections/robalbum'
 });
 
-},{"../models/ImageModel":167,"backbone":1,"jquery":4}],162:[function(require,module,exports){
+},{"../models/ImageModel":168,"backbone":1,"jquery":4}],162:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32591,43 +32591,51 @@ module.exports = React.createClass({
 
         return React.createElement(
             'div',
-            null,
+            { className: 'col-xs-9 main' },
             React.createElement(
-                'h3',
-                null,
-                'Album 1'
+                'div',
+                { className: 'col-xs-4' },
+                React.createElement(
+                    'h3',
+                    null,
+                    'Album 1'
+                ),
+                React.createElement('img', { 'data-id': 1, onClick: this.goToAlbum, src: one.url }),
+                React.createElement(
+                    'h3',
+                    null,
+                    'Album 2'
+                ),
+                React.createElement('img', { 'data-id': 2, onClick: this.goToAlbum, src: two.url }),
+                React.createElement(
+                    'h3',
+                    null,
+                    'Album 3'
+                ),
+                React.createElement('img', { 'data-id': 3, onClick: this.goToAlbum, src: three.url })
             ),
-            React.createElement('img', { 'data-id': 1, onClick: this.goToAlbum, src: one.url }),
             React.createElement(
-                'h3',
-                null,
-                'Album 2'
-            ),
-            React.createElement('img', { 'data-id': 2, onClick: this.goToAlbum, src: two.url }),
-            React.createElement(
-                'h3',
-                null,
-                'Album 3'
-            ),
-            React.createElement('img', { 'data-id': 3, onClick: this.goToAlbum, src: three.url }),
-            React.createElement(
-                'h3',
-                null,
-                'Album 4'
-            ),
-            React.createElement('img', { 'data-id': 4, onClick: this.goToAlbum, src: four.url }),
-            React.createElement(
-                'h3',
-                null,
-                'Album 5'
-            ),
-            React.createElement('img', { 'data-id': 5, onClick: this.goToAlbum, src: five.url }),
-            React.createElement(
-                'h3',
-                null,
-                'Album 6'
-            ),
-            React.createElement('img', { 'data-id': 6, onClick: this.goToAlbum, src: six.url })
+                'div',
+                { className: 'col-xs-4' },
+                React.createElement(
+                    'h3',
+                    null,
+                    'Album 4'
+                ),
+                React.createElement('img', { 'data-id': 4, onClick: this.goToAlbum, src: four.url }),
+                React.createElement(
+                    'h3',
+                    null,
+                    'Album 5'
+                ),
+                React.createElement('img', { 'data-id': 5, onClick: this.goToAlbum, src: five.url }),
+                React.createElement(
+                    'h3',
+                    null,
+                    'Album 6'
+                ),
+                React.createElement('img', { 'data-id': 6, onClick: this.goToAlbum, src: six.url })
+            )
         );
     },
     goToAlbum: function goToAlbum(e) {
@@ -32674,7 +32682,7 @@ module.exports = React.createClass({
 
 // }
 
-},{"../models/ImageModel":167,"backbone":1,"jquery":4,"react":159,"underscore":160}],163:[function(require,module,exports){
+},{"../models/ImageModel":168,"backbone":1,"jquery":4,"react":159,"underscore":160}],163:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32711,7 +32719,7 @@ module.exports = React.createClass({
 
                 return React.createElement(
                     'div',
-                    { className: 'inside-album', key: testModel._id },
+                    { className: 'col-xs-6 inside-album', key: testModel._id },
                     React.createElement(
                         'h5',
                         null,
@@ -32723,21 +32731,25 @@ module.exports = React.createClass({
         });
         return React.createElement(
             'div',
-            null,
-            React.createElement(
-                'h1',
-                null,
-                'Album Page!'
-            ),
-            React.createElement(
-                'button',
-                { onClick: this.goBack },
-                'Go Back'
-            ),
+            { className: 'container-fluid' },
             React.createElement(
                 'div',
-                { onClick: this.zoomIn },
-                albumContents
+                { className: 'col-xs-4 col-xs-offset-1' },
+                React.createElement(
+                    'h1',
+                    null,
+                    'Album Page!'
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: this.goBack },
+                    'Go Home'
+                ),
+                React.createElement(
+                    'div',
+                    { onClick: this.zoomIn },
+                    albumContents
+                )
             )
         );
     },
@@ -32754,7 +32766,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ImageModel":167,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],164:[function(require,module,exports){
+},{"../models/ImageModel":168,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],164:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32770,7 +32782,7 @@ module.exports = React.createClass({
     render: function render() {
         return React.createElement(
             'div',
-            null,
+            { className: 'col-xs-3 submit-img' },
             React.createElement(
                 'form',
                 { onSubmit: this.submitImg },
@@ -32778,7 +32790,46 @@ module.exports = React.createClass({
                 React.createElement('br', null),
                 React.createElement('input', { type: 'text', ref: 'url', placeholder: 'URL goes here' }),
                 React.createElement('br', null),
-                React.createElement('input', { type: 'text', ref: 'albumNumber', placeholder: 'Album Number' }),
+                React.createElement(
+                    'label',
+                    null,
+                    'Select Album Number'
+                ),
+                React.createElement('br', null),
+                React.createElement(
+                    'select',
+                    { ref: 'albumNumber' },
+                    React.createElement(
+                        'option',
+                        { value: '1' },
+                        '1'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: '2' },
+                        '2'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: '3' },
+                        '3'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: '4' },
+                        '4'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: '5' },
+                        '5'
+                    ),
+                    React.createElement(
+                        'option',
+                        { value: '6' },
+                        '6'
+                    )
+                ),
                 React.createElement('br', null),
                 React.createElement(
                     'button',
@@ -32797,11 +32848,93 @@ module.exports = React.createClass({
         });
         console.log(newPic);
         newPic.save();
+        this.forceUpdate();
     }
 
 });
 
-},{"../models/ImageModel":167,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],165:[function(require,module,exports){
+},{"../models/ImageModel":168,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],165:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Backbone = require('backbone');
+var $ = require('jquery');
+Backbone.$ = require('jquery');
+var ImageModel = require('../models/ImageModel');
+
+var AlbumListComponent = require('./AlbumListComponent');
+
+module.exports = React.createClass({
+    displayName: 'exports',
+
+    render: function render() {
+
+        return React.createElement(
+            'div',
+            { className: 'col-xs-3 side-nav' },
+            React.createElement(
+                'ul',
+                null,
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        'a',
+                        { href: '#album/1' },
+                        'Album 1'
+                    )
+                ),
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        'a',
+                        { href: '#album/2' },
+                        'Album 2'
+                    )
+                ),
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        'a',
+                        { href: '#album/3' },
+                        'Album 3'
+                    )
+                ),
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        'a',
+                        { href: '#album/4' },
+                        'Album 4'
+                    )
+                ),
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        'a',
+                        { href: '#album/5' },
+                        'Album 5'
+                    )
+                ),
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        'a',
+                        { href: '#album/6' },
+                        'Album 6'
+                    )
+                )
+            )
+        );
+    }
+});
+
+},{"../models/ImageModel":168,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],166:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32830,6 +32963,10 @@ module.exports = React.createClass({
         }).bind(this));
     },
     render: function render() {
+        var style = {
+            height: '500px',
+            width: '500px'
+        };
 
         var currentId = this.props.id;
 
@@ -32845,25 +32982,29 @@ module.exports = React.createClass({
                         null,
                         zoomModel.title
                     ),
-                    React.createElement('img', { 'data-id': zoomModel._id, src: zoomModel.url })
+                    React.createElement('img', { style: style, 'data-id': zoomModel._id, src: zoomModel.url })
                 );
             }
         });
         return React.createElement(
             'div',
-            null,
+            { className: 'col-xs-8 zoom' },
             React.createElement(
-                'h5',
-                null,
-                'Zoom Page!'
-            ),
-            zoomedContents
+                'div',
+                { onClick: this.zoomOut },
+                zoomedContents
+            )
         );
+    },
+    zoomOut: function zoomOut(e) {
+        e.preventDefault();
+        console.log('works');
+        // this.props.myRouter.navigate("album/"+, {trigger: true});
     }
 
 });
 
-},{"../models/ImageModel":167,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],166:[function(require,module,exports){
+},{"../models/ImageModel":168,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],167:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32874,6 +33015,7 @@ var HomePageComponent = require('./components/HomePageComponent');
 var AlbumViewComponent = require('./components/AlbumViewComponent');
 var AlbumListComponent = require('./components/AlbumListComponent');
 var ZoomInComponent = require('./components/ZoomInComponent');
+var SideNavComponent = require('./components/SideNavComponent');
 
 var ImageCollection = require('./collections/ImageCollection');
 
@@ -32895,17 +33037,18 @@ var App = Backbone.Router.extend({
         ), document.querySelector('#container'));
     },
     album: function album(number) {
-        React.render(React.createElement(AlbumViewComponent, { myRouter: myRouter, number: number }), document.querySelector('#container'));
+        React.render(React.createElement(
+            'div',
+            null,
+            React.createElement(SideNavComponent, null),
+            React.createElement(AlbumViewComponent, { myRouter: myRouter, number: number })
+        ), document.querySelector('#container'));
     },
     zoom: function zoom(id) {
         React.render(React.createElement(
             'div',
             null,
-            React.createElement(
-                'h1',
-                null,
-                'Helloooooo'
-            ),
+            React.createElement(SideNavComponent, null),
             React.createElement(ZoomInComponent, { myRouter: myRouter, id: id })
         ), document.querySelector('#container'));
     }
@@ -32919,7 +33062,7 @@ Backbone.history.start();
 // 	ImgList.add(postModel);
 // }
 
-},{"./collections/ImageCollection":161,"./components/AlbumListComponent":162,"./components/AlbumViewComponent":163,"./components/HomePageComponent":164,"./components/ZoomInComponent":165,"backbone":1,"jquery":4,"react":159}],167:[function(require,module,exports){
+},{"./collections/ImageCollection":161,"./components/AlbumListComponent":162,"./components/AlbumViewComponent":163,"./components/HomePageComponent":164,"./components/SideNavComponent":165,"./components/ZoomInComponent":166,"backbone":1,"jquery":4,"react":159}],168:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
@@ -32947,7 +33090,7 @@ module.exports = Backbone.Model.extend({
 	// }
 });
 
-},{"backbone":1,"jquery":4}]},{},[166])
+},{"backbone":1,"jquery":4}]},{},[167])
 
 
 //# sourceMappingURL=all.js.map

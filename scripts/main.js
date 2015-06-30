@@ -6,6 +6,7 @@ var HomePageComponent = require('./components/HomePageComponent');
 var AlbumViewComponent = require('./components/AlbumViewComponent');
 var AlbumListComponent = require('./components/AlbumListComponent');
 var ZoomInComponent = require('./components/ZoomInComponent');
+var SideNavComponent = require('./components/SideNavComponent');
 
 var ImageCollection = require('./collections/ImageCollection');
 
@@ -28,13 +29,16 @@ var App = Backbone.Router.extend({
     },
     album: function(number) {
     	React.render(
-        <AlbumViewComponent myRouter={myRouter} number={number}/>,
+        <div>
+            <SideNavComponent />
+            <AlbumViewComponent myRouter={myRouter} number={number}/>
+        </div>,
         document.querySelector('#container'));
     },
     zoom: function(id) {
         React.render(
         <div>   
-            <h1>Helloooooo</h1>
+            <SideNavComponent />
             <ZoomInComponent myRouter={myRouter} id={id} />
         </div>,
         document.querySelector('#container'));
