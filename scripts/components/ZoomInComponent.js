@@ -25,28 +25,26 @@ module.exports = React.createClass({
         );
     },
     render: function() {
-        console.log(this.props.id);
-        // var URL = window.location.hash.split("/");
-        // console.log(URL);
-        // var currentHash=newURL[1];
-        // console.log(currentHash);
 
-        // var ZoomContents = this.state.ZoomArray.map(function(testModel){
+            var currentId = this.props.id;
 
-        //     if(testModel.albumNumber === currentHash) {
+            var zoomedContents = this.state.ZoomArray.map(function(zoomModel){
 
-        //     return (
-        //             <div className="inside-album" key={testModel._id}>
-        //                 <h5>{testModel.title}</h5>
-        //                 <img data-id={testModel._id} src={testModel.url} />
-        //             </div>
-        //         );
-        //     }
+            if(zoomModel._id === currentId) {
+
+            return (
+                    <div className="inside-album" key={zoomModel._id}>
+                        <h5>{zoomModel.title}</h5>
+                        <img data-id={zoomModel._id} src={zoomModel.url} />
+                    </div>
+                );
+            }
             
-        // });
+        });
         return (
             <div>
-                <h1>Zoom Page!</h1>
+                <h5>Zoom Page!</h5>
+                {zoomedContents}
             </div>        
         );
     }

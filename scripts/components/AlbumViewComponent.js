@@ -30,7 +30,6 @@ module.exports = React.createClass({
         var albumContents = this.state.AlbumArray.map(function(testModel){
 
             if(testModel.albumNumber === currentAlbum) {
-                // console.log(testModel._id);
 
             return (
                     <div className="inside-album" key={testModel._id}>
@@ -58,6 +57,7 @@ module.exports = React.createClass({
     zoomIn: function(e) {
         e.preventDefault();
         var imgID = $(e.target).attr("data-id");
+        console.log(imgID);
         this.props.myRouter.navigate("zoom/"+imgID, {trigger:true});  
     }
 

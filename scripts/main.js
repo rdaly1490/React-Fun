@@ -5,7 +5,7 @@ Backbone.$ = require('jquery');
 var HomePageComponent = require('./components/HomePageComponent');
 var AlbumViewComponent = require('./components/AlbumViewComponent');
 var AlbumListComponent = require('./components/AlbumListComponent');
-var ZoomInComponent = require('./components/AlbumListComponent');
+var ZoomInComponent = require('./components/ZoomInComponent');
 
 var ImageCollection = require('./collections/ImageCollection');
 

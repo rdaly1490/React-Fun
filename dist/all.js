@@ -32521,7 +32521,7 @@ module.exports = Backbone.Collection.extend({
 	url: 'http://tiny-pizza-server.herokuapp.com/collections/robalbum'
 });
 
-},{"../models/ImageModel":166,"backbone":1,"jquery":4}],162:[function(require,module,exports){
+},{"../models/ImageModel":167,"backbone":1,"jquery":4}],162:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32633,6 +32633,7 @@ module.exports = React.createClass({
     goToAlbum: function goToAlbum(e) {
         e.preventDefault();
         var dataID = $(e.target).attr('data-id');
+        console.log(dataID);
         this.props.myRouter.navigate('album/' + dataID, { trigger: true });
     }
 });
@@ -32673,7 +32674,7 @@ module.exports = React.createClass({
 
 // }
 
-},{"../models/ImageModel":166,"backbone":1,"jquery":4,"react":159,"underscore":160}],163:[function(require,module,exports){
+},{"../models/ImageModel":167,"backbone":1,"jquery":4,"react":159,"underscore":160}],163:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32707,7 +32708,6 @@ module.exports = React.createClass({
         var albumContents = this.state.AlbumArray.map(function (testModel) {
 
             if (testModel.albumNumber === currentAlbum) {
-                // console.log(testModel._id);
 
                 return React.createElement(
                     'div',
@@ -32748,12 +32748,13 @@ module.exports = React.createClass({
     zoomIn: function zoomIn(e) {
         e.preventDefault();
         var imgID = $(e.target).attr('data-id');
+        console.log(imgID);
         this.props.myRouter.navigate('zoom/' + imgID, { trigger: true });
     }
 
 });
 
-},{"../models/ImageModel":166,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],164:[function(require,module,exports){
+},{"../models/ImageModel":167,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],164:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32800,7 +32801,69 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ImageModel":166,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],165:[function(require,module,exports){
+},{"../models/ImageModel":167,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],165:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Backbone = require('backbone');
+var $ = require('jquery');
+Backbone.$ = require('jquery');
+var ImageModel = require('../models/ImageModel');
+
+var AlbumListComponent = require('./AlbumListComponent');
+
+module.exports = React.createClass({
+    displayName: 'exports',
+
+    getInitialState: function getInitialState() {
+        return {
+            ZoomArray: []
+        };
+    },
+    componentWillMount: function componentWillMount() {
+        $.get('http://tiny-pizza-server.herokuapp.com/collections/robalbum', (function (imgList) {
+            if (this.isMounted()) {
+                this.setState({
+                    ZoomArray: imgList
+                });
+            }
+        }).bind(this));
+    },
+    render: function render() {
+
+        var currentId = this.props.id;
+
+        var zoomedContents = this.state.ZoomArray.map(function (zoomModel) {
+
+            if (zoomModel._id === currentId) {
+
+                return React.createElement(
+                    'div',
+                    { className: 'inside-album', key: zoomModel._id },
+                    React.createElement(
+                        'h5',
+                        null,
+                        zoomModel.title
+                    ),
+                    React.createElement('img', { 'data-id': zoomModel._id, src: zoomModel.url })
+                );
+            }
+        });
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'h5',
+                null,
+                'Zoom Page!'
+            ),
+            zoomedContents
+        );
+    }
+
+});
+
+},{"../models/ImageModel":167,"./AlbumListComponent":162,"backbone":1,"jquery":4,"react":159}],166:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32810,7 +32873,7 @@ Backbone.$ = require('jquery');
 var HomePageComponent = require('./components/HomePageComponent');
 var AlbumViewComponent = require('./components/AlbumViewComponent');
 var AlbumListComponent = require('./components/AlbumListComponent');
-var ZoomInComponent = require('./components/AlbumListComponent');
+var ZoomInComponent = require('./components/ZoomInComponent');
 
 var ImageCollection = require('./collections/ImageCollection');
 
@@ -32856,7 +32919,7 @@ Backbone.history.start();
 // 	ImgList.add(postModel);
 // }
 
-},{"./collections/ImageCollection":161,"./components/AlbumListComponent":162,"./components/AlbumViewComponent":163,"./components/HomePageComponent":164,"backbone":1,"jquery":4,"react":159}],166:[function(require,module,exports){
+},{"./collections/ImageCollection":161,"./components/AlbumListComponent":162,"./components/AlbumViewComponent":163,"./components/HomePageComponent":164,"./components/ZoomInComponent":165,"backbone":1,"jquery":4,"react":159}],167:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
@@ -32884,7 +32947,7 @@ module.exports = Backbone.Model.extend({
 	// }
 });
 
-},{"backbone":1,"jquery":4}]},{},[165])
+},{"backbone":1,"jquery":4}]},{},[166])
 
 
 //# sourceMappingURL=all.js.map

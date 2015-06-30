@@ -96,6 +96,7 @@ module.exports = React.createClass({
     goToAlbum: function(e) {
         e.preventDefault();
         var dataID = $(e.target).attr("data-id");
+        console.log(dataID);
         this.props.myRouter.navigate("album/"+dataID, {trigger:true})
     }
 });
